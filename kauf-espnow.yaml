@@ -20,7 +20,7 @@ substitutions:
                                # **** USE DASHES (-) INSTEAD OF SPACES OR UNDERSCORE (_).  USE ONLY LOWER CASE LETTERS.     ****
 
   remote_mac: '"001122334455"' # The mac address of the remote to listen for
-  remote_button: "{1,2,0,0}"   # Up to 4 groups that (4 groups on remote) that the light can be grouped to. 0 means not used. This must be 4 elements
+  remote_groups: "{1,2,0,0}"   # Up to 4 groups that (4 groups on remote) that the light can be grouped to. 0 means not used. This must be 4 elements
 
   remote_brightness_stepsize: "0.1"   # Step size of brightness adjustments. Must within be 0.00-1.00. 10% = 0.1, 25% = 0.25
   
@@ -42,7 +42,7 @@ globals:
     type: uint8_t[4]
     restore_value: no
     # 1-4 are button numbers. 0 means not used. Allows light to be paired to multiple buttons
-    initial_value: $remote_button
+    initial_value: $remote_groups
   - id: remote_button_last_sel
     type: uint8_t
     restore_value: no
