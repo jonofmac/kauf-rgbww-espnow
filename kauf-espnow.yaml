@@ -56,7 +56,7 @@ wizmote:
       condition:
         # Check if remote matches
         - or:
-          - $enable_always
+          - lambda: "return $enable_always;"
           - not:
               # If home assistant is down for some reason
               api.connected:
