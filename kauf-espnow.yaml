@@ -1,13 +1,20 @@
 # https://esphome.io/guides/configuration-types.html#substitutions
 substitutions:
 
+  # Note: To the top-level esphome yaml file, you need to add/copy the substitution listed below,
+  #   or else the binary will not fit into memory for OTA updates.
+  # disable_webserver: "true" 
+  #
+
   # substitutions can be changed here if you are using this file directly in the ESPHome dashboard.  The better approach is
   # to incorporate this file as a package using the following lines, and then overwrite these substitutions in your local
   # yaml file by redefining them.
   #
-  # packages:
+  # This is reliant on packages:
   #   kauf.rgbww: github://KaufHA/kauf-rgbww-bulbs/kauf-bulb.yaml
-  #
+  #   wizmote-esphome: github://jesserockz/wizmote-esphome
+
+  
 
   name: kauf-espnow            # **** CHANGE DEVICE NAME TO SOMETHING UNIQUE PER DEVICE.  RENAME YAML FILE TO SAME NAME.    ****
                                # **** USE DASHES (-) INSTEAD OF SPACES OR UNDERSCORE (_).  USE ONLY LOWER CASE LETTERS.     ****
