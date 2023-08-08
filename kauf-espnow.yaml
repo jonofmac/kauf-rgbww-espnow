@@ -25,7 +25,7 @@ external_components:
     components:
       - esp_now
       - wizmote
-
+esp_now:
 wizmote:
   on_button:
     if:
