@@ -41,6 +41,9 @@ When using kauf-bulb.yaml as a package in the ESPHome dashboard, you can configu
 
 ## How to get remote's MAC address?
 Once you add the package and upload to your bulb (You can use any/default mac address until you know what yours is), connect to it through ESPHome's log functionality. By default, the logger is set to "debug", which will print all ESPNow packets received by the bulb. You will see the MAC address listed (and the data) when you press any button on the remote. Put the mac address without any : or . into the field.
+For example, you might see a line that shows `[D][esp_now:071]: mac: 44.4F.8E.BA.AD.2E (6), data: 81.69.0A.00.00.20.10.01.59.BB.8F.32.7D (13)`
+The mac address field would be `remote_mac: '"444f8ebaad2e"'`
+Note that there is a ' and " next to each other. This is needed for ESPHome to properly parse the string.
 
 ## Troubleshooting
 If you accidentally uploaded with web server enabled, and now you get a "not enough space" when trying to upload again, you need to reduce the size of the binary. Comment out the espnow stuff and make sure you add the substitution which disables the webserver (see above). This smaller binary should upload. Once that is complete, then you can uncomment (add back) the espnow code and try again.
