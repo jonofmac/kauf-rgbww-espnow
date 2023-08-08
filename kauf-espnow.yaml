@@ -15,9 +15,9 @@ substitutions:
   remote_mac: '"001122334455"' # The mac address of the remote to listen for
   remote_button: "{1,2,0,0}"   # Up to 4 groups that (4 groups on remote) that the light can be grouped to. 0 means not used. This must be 4 elements
 
-  brightness_stepsize: "0.1"   # Step size of brightness adjustments. Must within be 0.00-1.00. 10% = 0.1, 25% = 0.25
+  remote_brightness_stepsize: "0.1"   # Step size of brightness adjustments. Must within be 0.00-1.00. 10% = 0.1, 25% = 0.25
   
-  enable_always:  "false"      # set to "true" to only utilize this when HASS is not connected
+  remote_enable_always: "false"       # set to "true" to only utilize this when HASS is not connected
 
   
 
@@ -48,7 +48,7 @@ globals:
   - id: stepsize
     type: float
     restore_value: no
-    initial_value: $brightness_stepsize
+    initial_value: $remote_brightness_stepsize
 
 external_components:
   - source: github://jesserockz/wizmote-esphome
@@ -62,7 +62,7 @@ wizmote:
       condition:
         # Check if remote matches
         - or:
-          - lambda: "return $enable_always;"
+          - lambda: "return $remote_enable_always;"
           - not:
               # If home assistant is down for some reason
               api.connected:
