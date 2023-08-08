@@ -14,6 +14,8 @@ substitutions:
 
   remote_mac: '"001122334455"' # The mac address of the remote to listen for
   remote_button: "{1,2,0,0}"   # Up to 4 groups that (4 groups on remote) that the light can be grouped to. 0 means not used. This must be 4 elements
+
+  brightness_stepsize: "0.1"   # Step size of brightness adjustments. Must within be 0.00-1.00. 10% = 0.1, 25% = 0.25
   
   enable_always:  "false"      # set to "true" to only utilize this when HASS is not connected
 
@@ -43,6 +45,10 @@ globals:
     type: uint32_t
     restore_value: no
     initial_value: "0"
+  - id: stepsize
+    type: float
+    restore_value: no
+    initial_value: $brightness_stepsize
 
 external_components:
   - source: github://jesserockz/wizmote-esphome
@@ -100,14 +106,14 @@ wizmote:
                   } else if (data.button == 8) {
                     float brightness;
                     id(kauf_light).remote_values.as_brightness(&brightness);
-                    brightness -= 0.1f;
+                    brightness -= id(stepsize);
                     if (brightness < 0.0f)
                       brightness = 0.0f;
                     id (kauf_light).turn_on().set_brightness(brightness).perform();
                   } else if (data.button == 9) {
                     float brightness;
                     id(kauf_light).remote_values.as_brightness(&brightness);
-                    brightness += 0.1f;
+                    brightness += id(stepsize);
                     if (brightness > 1.0f)
                       brightness = 1.0f;
                     id (kauf_light).turn_on().set_brightness(brightness).perform();
