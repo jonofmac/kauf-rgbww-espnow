@@ -14,17 +14,13 @@ substitutions:
   #   kauf.rgbww: github://KaufHA/kauf-rgbww-bulbs/kauf-bulb.yaml
   #   wizmote-esphome: github://jesserockz/wizmote-esphome
 
-  
-
-  name: kauf-espnow            # **** CHANGE DEVICE NAME TO SOMETHING UNIQUE PER DEVICE.  RENAME YAML FILE TO SAME NAME.    ****
-                               # **** USE DASHES (-) INSTEAD OF SPACES OR UNDERSCORE (_).  USE ONLY LOWER CASE LETTERS.     ****
-
-  remote_mac: '"001122334455"' # The mac address of the remote to listen for
-  remote_groups: "{1,2,0,0}"   # Up to 4 groups that (4 groups on remote) that the light can be grouped to. 0 means not used. This must be 4 elements
-
-  remote_brightness_stepsize: "0.1"   # Step size of brightness adjustments. Must within be 0.00-1.00. 10% = 0.1, 25% = 0.25
-  
-  remote_enable_always: "false"       # set to "true" to only utilize this when HASS is not connected
+  name: kauf-espnow                  # **** CHANGE DEVICE NAME TO SOMETHING UNIQUE PER DEVICE.  RENAME YAML FILE TO SAME NAME.    ****
+                                     # **** USE DASHES (-) INSTEAD OF SPACES OR UNDERSCORE (_).  USE ONLY LOWER CASE LETTERS.     ****
+                                     
+  remote_enable_always: "true"       # set to "false" to only utilize this when HASS is not connected
+  remote_mac: '"001122334455"'       # The mac address of the remote to listen for
+  remote_groups: "{1,2,0,0}"         # Up to 4 groups that (4 groups on remote) that the light can be grouped to. 0 means not used. This must be 4 elements
+  remote_brightness_stepsize: "0.1"  # Step size of brightness adjustments. Must within be 0.00-1.00. 10% = 0.1, 25% = 0.25
 
   
 
