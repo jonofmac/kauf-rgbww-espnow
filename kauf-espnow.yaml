@@ -12,13 +12,37 @@ substitutions:
   name: kauf-espnow            # **** CHANGE DEVICE NAME TO SOMETHING UNIQUE PER DEVICE.  RENAME YAML FILE TO SAME NAME.    ****
                                # **** USE DASHES (-) INSTEAD OF SPACES OR UNDERSCORE (_).  USE ONLY LOWER CASE LETTERS.     ****
 
+  remote_mac: '"001122334455"' # The mac address of the remote to listen for
+  remote_button: "{1,2,0,0}"   # Up to 4 groups that (4 groups on remote) that the light can be grouped to. 0 means not used. This must be 4 elements
+  
   enable_always:  "false"      # set to "true" to only utilize this when HASS is not connected
+
+  
 
   # https://esphome.io/components/esphome.html#esphome-creators-project
   project_name: jv.kauf-espnow
   project_ver_num: "1.0"
   project_ver_let: a
 
+globals:
+  - id: remote_mac
+    type: std::string
+    restore_value: no
+    initial_value: $remote_mac
+  - id: remote_button
+    type: uint8_t[4]
+    restore_value: no
+    # 1-4 are button numbers. 0 means not used. Allows light to be paired to multiple buttons
+    initial_value: $remote_button
+  - id: remote_button_last_sel
+    type: uint8_t
+    restore_value: no
+    # Whether we assume the actions apply to this bulb or not. 0 = not this bulb, 1 = yes
+    initial_value: "1"
+  - id: remote_sequence
+    type: uint32_t
+    restore_value: no
+    initial_value: "0"
 
 external_components:
   - source: github://jesserockz/wizmote-esphome
@@ -31,9 +55,11 @@ wizmote:
     if:
       condition:
         # Check if remote matches
-        - not:
-            # If home assistant is down for some reason
-            api.connected:
+        - or:
+          - $enable_always
+          - not:
+              # If home assistant is down for some reason
+              api.connected:
         - lambda: |-
             if (id(remote_mac) != format_hex(data.bssid, 6))
               return 0;
